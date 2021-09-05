@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      
+      # Setup NPM and VSCE
+      - uses: actions/setup-node@v2
+      - run: npm install
+      - run: npm install vsce --save-dev
+      
+      # Build
+      - run: vsce package --out async-redux.vsix
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}
+      
+      # Release
+      - uses: ncipollo/release-action@v1
+        with:
+          artifacts: "async-redux.vsix"
+          token: ${{ secrets.GITHUB_TOKEN }}

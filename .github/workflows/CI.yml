@@ -16,7 +16,7 @@ jobs:
       # Setup NPM and VSCE
       - uses: actions/setup-node@v2
       - run: npm install
-      - run: npm install vsce --save-dev
+      - run: npm install -g vsce
       
       # Build
       - run: vsce package --out async-redux.vsix

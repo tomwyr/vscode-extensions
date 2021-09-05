@@ -1,16 +1,18 @@
-name: CI
+name: publish
 
 on:
   push:
-    branches: [ master ]
+    tags:
+    - '*'
 
   workflow_dispatch:
 
 jobs:
-  build:
+  publish:
     runs-on: ubuntu-latest
 
     steps:
+      # Checkout repo
       - uses: actions/checkout@v2
       
       # Setup NPM and VSCE
@@ -22,9 +24,6 @@ jobs:
       - run: vsce package --out async-redux.vsix
         env:
           VSCE_PAT: ${{ secrets.VSCE_PAT }}
-      
-      # Create Git tag from package version
-      - uses: neverendingqs/gh-action-tag-on-npm-version@master
 
       # Release
       - uses: ncipollo/release-action@v1

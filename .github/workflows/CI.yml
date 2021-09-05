@@ -23,6 +23,9 @@ jobs:
         env:
           VSCE_PAT: ${{ secrets.VSCE_PAT }}
       
+      # Create Git tag from package version
+      - uses: neverendingqs/gh-action-tag-on-npm-version@master
+
       # Release
       - uses: ncipollo/release-action@v1
         with:

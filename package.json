@@ -2,7 +2,7 @@
   "name": "async-redux",
   "displayName": "Async Redux",
   "description": "Provides snippets and commands for Async Redux state management library.",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "publisher": "tomwyr",
   "license": "MIT",
   "repository": {

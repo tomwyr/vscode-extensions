@@ -35,7 +35,7 @@ export const newAsyncReduxClientFeature = async (uri: Uri) => {
   try {
     await generateFeatureCode(featureName, targetDirectory);
     window.showInformationMessage(
-      `Successfully Generated ${snakeCaseFeatureName} Feature`
+      `Successfully generated ${snakeCaseFeatureName} client feature`
     );
   } catch (error) {
     window.showErrorMessage(
@@ -82,7 +82,7 @@ async function generateFeatureCode(
 
   const generatePromises = [
     createWidgetTemplate(featureName, featureDirectoryPath),
-    createPageConnectorTemplate(featureName, featureDirectoryPath),
+    createConnectorTemplate(featureName, featureDirectoryPath),
     createViewModelTemplate(featureName, featureDirectoryPath),
     createViewModelFactoryTemplate(featureName, featureDirectoryPath),
   ];
@@ -112,6 +112,10 @@ function createExportsTemplate(featureName: string, targetDirectory: string) {
   const targetFile = `${snakeCaseFeatureName}.dart`;
   const targetPath = `${targetDirectory}/${targetFile}`;
 
+  const widgetSuffix = config.client.widget.suffix();
+  const connectorIncludeWidgetSuffix =
+    config.client.connector.includeWidgetSuffix();
+
   if (existsSync(targetPath)) {
     throw Error(`${targetFile} already exists`);
   }
@@ -119,7 +123,11 @@ function createExportsTemplate(featureName: string, targetDirectory: string) {
   return new Promise<void>(async (resolve, reject) => {
     writeFile(
       targetPath,
-      getClientExportsTemplate(featureName),
+      getClientExportsTemplate(
+        featureName,
+        widgetSuffix,
+        connectorIncludeWidgetSuffix
+      ),
       "utf8",
       (error) => {
         if (error) {
@@ -133,9 +141,12 @@ function createExportsTemplate(featureName: string, targetDirectory: string) {
 }
 
 function createWidgetTemplate(featureName: string, targetDirectory: string) {
+  const pascalCaseFeatureName = changeCase.pascalCase(
+    featureName.toLowerCase()
+  );
   const widgetSuffix = config.client.widget.suffix();
-  const widgetName = `${featureName}${widgetSuffix}`;
-  const snakeCaseWidgetName = changeCase.snakeCase(widgetName.toLowerCase());
+  const widgetName = `${pascalCaseFeatureName}${widgetSuffix}`;
+  const snakeCaseWidgetName = changeCase.snakeCase(widgetName);
 
   const targetFile = `${snakeCaseWidgetName}.dart`;
   const targetPath = `${targetDirectory}/${targetFile}`;
@@ -155,19 +166,24 @@ function createWidgetTemplate(featureName: string, targetDirectory: string) {
   });
 }
 
-function createPageConnectorTemplate(
-  featureName: string,
-  targetDirectory: string
-) {
+function createConnectorTemplate(featureName: string, targetDirectory: string) {
   const snakeCaseFeatureName = changeCase.snakeCase(featureName.toLowerCase());
-  const targetFile = `${snakeCaseFeatureName}_page_connector.dart`;
+
+  const widgetSuffix = config.client.widget.suffix();
+  const includeWidgetSuffix = config.client.connector.includeWidgetSuffix();
+
+  let targetFile = snakeCaseFeatureName;
+  if (includeWidgetSuffix) {
+    targetFile += `_${widgetSuffix}`;
+  }
+  targetFile += `_connector.dart`;
+
   const targetPath = `${targetDirectory}/${targetFile}`;
 
   if (existsSync(targetPath)) {
     throw Error(`${targetFile} already exists`);
   }
 
-  const widgetSuffix = config.client.widget.suffix();
   const connectorIncludeWidgetSuffix =
     config.client.connector.includeWidgetSuffix();
   const stateName = config.business.state.name();

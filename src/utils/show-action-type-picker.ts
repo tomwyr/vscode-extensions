@@ -1,6 +1,8 @@
 import { QuickPickItem, window } from "vscode";
 
-export async function showActionTypePicker(): Promise<ActionTypePickItem | undefined> {
+export async function showActionTypePicker(): Promise<
+  ActionTypePickItem | undefined
+> {
   return new Promise((resolve) => {
     let selection: ActionTypePickItem | undefined;
 
@@ -9,7 +11,7 @@ export async function showActionTypePicker(): Promise<ActionTypePickItem | undef
     input.placeholder = "Action Type";
     input.items = [syncPickItem, asyncPickItem];
 
-    input.onDidChangeSelection(items => {
+    input.onDidChangeSelection((items) => {
       selection = items.length > 0 ? items[0] : undefined;
     });
 

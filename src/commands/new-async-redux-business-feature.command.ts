@@ -33,7 +33,7 @@ export const newAsyncReduxBusinessFeature = async (uri: Uri) => {
   try {
     await generateFeatureCode(featureName, targetDirectory);
     window.showInformationMessage(
-      `Successfully Generated ${snakeCaseFeatureName} feature`
+      `Successfully generated ${snakeCaseFeatureName} business feature`
     );
   } catch (error) {
     window.showErrorMessage(

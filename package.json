@@ -32,78 +32,96 @@
       {
         "title": "Async Redux",
         "properties": {
-          "async-redux.enableSnippets": {
+          "async-redux.general.enableSnippets": {
             "type": "boolean",
             "description": "Whether to include snippets in code completion",
             "default": true
           },
           "async-redux.business.generateExports": {
             "type": "boolean",
-            "description": "Whether to generate exports file containing redux actions and state.",
-            "default": true
-          },
-          "async-redux.business.state.generateFreezed": {
-            "type": "boolean",
-            "description": "Whether to generate redux state as freezed class.",
+            "description": "Whether to generate exports of actions and state.",
             "default": true
           },
           "async-redux.business.state.name": {
             "type": "string",
-            "description": "Name of the generated redux state class."
+            "description": "Name of state class.",
+            "default": "AppState",
+            "pattern": "^.+$",
+            "patternErrorMessage": "Value cannot be empty"
           },
           "async-redux.business.state.importPath": {
             "type": "string",
-            "description": "Import path pointing to redux state class.",
+            "description": "Import path pointing to state class.",
+            "default": "package:async_redux/async_redux.dart",
             "pattern": "^(.+\\.dart)?$",
             "patternErrorMessage": "Value has to be valid Dart file import path"
           },
+          "async-redux.business.state.generateFreezed": {
+            "type": "boolean",
+            "description": "Whether to generate state as a freezed class.",
+            "default": false
+          },
           "async-redux.business.action.baseName": {
             "type": "string",
-            "description": "Name of redux base action class.",
-            "default": "ReduxAction"
+            "description": "Name of base action class.",
+            "default": "ReduxAction",
+            "pattern": "^.+$",
+            "patternErrorMessage": "Value cannot be empty"
           },
           "async-redux.business.action.importPath": {
             "type": "string",
-            "description": "Import path pointing to base redux action class."
+            "description": "Import path pointing to base action class.",
+            "default": "package:async_redux/async_redux.dart",
+            "pattern": "^(.+\\.dart)?$",
+            "patternErrorMessage": "Value has to be valid Dart file import path"
           },
           "async-redux.business.action.includeState": {
             "type": "boolean",
-            "description": "Whether to include state in action's type parameters.",
+            "description": "Whether to include state in action type parameters.",
             "default": true
           },
           "async-redux.client.generateExports": {
             "type": "boolean",
-            "description": "Whether to generate exports file containing client files.",
+            "description": "Whether to generate exports of widget, connector, view model and view model factory.",
             "default": true
           },
           "async-redux.client.widget.suffix": {
             "type": "string",
             "default": "Widget",
-            "description": "Suffix appended to widget's name."
+            "description": "Suffix appended to widget name.",
+            "pattern": "^.+$",
+            "patternErrorMessage": "Value cannot be empty"
           },
           "async-redux.client.connector.includeWidgetSuffix": {
             "type": "boolean",
             "default": false,
-            "description": "Whether to include widget's suffix at the end of connector's name."
+            "description": "Whether to include widget suffix at the end of connector name."
           },
           "async-redux.client.viewModel.baseName": {
             "type": "string",
-            "description": "Name of redux base view model class.",
-            "default": "Vm"
+            "description": "Name of base view model class.",
+            "default": "Vm",
+            "pattern": "^.+$",
+            "patternErrorMessage": "Value cannot be empty"
           },
           "async-redux.client.viewModel.importPath": {
             "type": "string",
-            "description": "Import path pointing to redux view model class.",
+            "description": "Import path pointing to base view model class.",
+            "default": "package:async_redux/async_redux.dart",
             "pattern": "^(.+\\.dart)?$",
             "patternErrorMessage": "Value has to be valid Dart file import path"
           },
           "async-redux.client.viewModelFactory.baseName": {
             "type": "string",
-            "description": "Name of the redux base view model factory class."
+            "description": "Name of the base view model factory class.",
+            "default": "VmFactory",
+            "pattern": "^.+$",
+            "patternErrorMessage": "Value cannot be empty"
           },
           "async-redux.client.viewModelFactory.importPath": {
             "type": "string",
-            "description": "Import path pointing to redux view model factory class.",
+            "description": "Import path pointing to base view model factory class.",
+            "default": "package:async_redux/async_redux.dart",
             "pattern": "^(.+\\.dart)?$",
             "patternErrorMessage": "Value has to be valid Dart file import path"
           },

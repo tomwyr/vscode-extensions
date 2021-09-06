@@ -13,7 +13,7 @@ export function getActionTemplate(
   const reduxActionName = `${pascalCaseActionName}Action`;
   const actionReduce = getActionTypeReduce(actionType, stateName);
 
-  const imports = Array.from(new Set([actionImport, stateImport])).join('\n');
+  const imports = Array.from(new Set([actionImport, stateImport])).join("\n");
 
   return `${imports}
 
@@ -23,7 +23,10 @@ class ${reduxActionName} extends ${actionBaseName} {
 `;
 }
 
-function getActionTypeReduce(actionType: ActionType, stateName: string): string {
+function getActionTypeReduce(
+  actionType: ActionType,
+  stateName: string
+): string {
   switch (actionType) {
     case ActionType.sync:
       return getSyncReduce(stateName);

@@ -8,20 +8,18 @@ export function getConnectorTemplate(
   stateName: string,
   stateImportPath: string
 ): string {
-  const pascalCaseFeatureName = changeCase.pascalCase(featureName.toLowerCase());
+  const pascalCaseFeatureName = changeCase.pascalCase(
+    featureName.toLowerCase()
+  );
   const snakeCaseFeatureName = changeCase.snakeCase(featureName.toLowerCase());
 
-  const widgetName = `${pascalCaseFeatureName}${widgetSuffix}`;
-  const pascalCaseWidgetName = changeCase.pascalCase(widgetName.toLowerCase());
-
-  let connectorName = featureName;
+  let connectorName = pascalCaseFeatureName;
   if (connectorIncludeWidgetSuffix) connectorName += widgetSuffix;
-  const pascalCaseConnectorName=changeCase.pascalCase(connectorName.toLowerCase());
-   
-  const pageConnectorName = `${pascalCaseConnectorName}Connector`;
+  connectorName += "Connector";
+
+  const widgetName = `${pascalCaseFeatureName}${widgetSuffix}`;
   const viewModelName = `${pascalCaseFeatureName}ViewModel`;
   const viewModelFactoryName = `${pascalCaseFeatureName}ViewModelFactory`;
-  const pageName = pascalCaseWidgetName;
   const storeConnectorTypeParameters = `${stateName}, ${viewModelName}`;
 
   let reduxImports = `${constants.asyncRedux.importStatement}`;
@@ -33,11 +31,11 @@ export function getConnectorTemplate(
 ${reduxImports}
 import '${snakeCaseFeatureName}.dart';
 
-class ${pageConnectorName} extends StatelessWidget {
+class ${connectorName} extends StatelessWidget {
   @override
   Widget build(BuildContext context) => StoreConnector<${storeConnectorTypeParameters}>(
         vm: () => ${viewModelFactoryName}(),
-        builder: (context, viewModel) => ${pageName}(),
+        builder: (context, viewModel) => ${widgetName}(),
       );
 }
 `;

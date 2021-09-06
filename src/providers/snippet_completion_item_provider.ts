@@ -15,7 +15,7 @@ import * as fs from "fs";
 import * as path from "path";
 
 export class SnippetCompletionItemProvider implements CompletionItemProvider {
-  private snippetFileNames = ["feature.json", "screen.json"];
+  private snippetFileNames = ["business.json", "client.json"];
 
   private extensionPath: string;
 
@@ -35,7 +35,9 @@ export class SnippetCompletionItemProvider implements CompletionItemProvider {
     _token: CancellationToken,
     _context: CompletionContext
   ): ProviderResult<CompletionItem[]> {
-    if (!config.enableSnippets()) return;
+    const general = config.general;
+    console.log(general);
+    if (!config.general.enableSnippets()) return;
 
     return this.snippetItems;
   }

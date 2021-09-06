@@ -3,40 +3,40 @@
     "prefix": "arexports",
     "description": "AsyncRedux exports",
     "body": [
-      "export '${TM_FILENAME_BASE}_page.dart';",
-      "export '${TM_FILENAME_BASE}_page_connector.dart';",
+      "export '${TM_FILENAME_BASE}_widget.dart';",
+      "export '${TM_FILENAME_BASE}_connector.dart';",
       "export '${TM_FILENAME_BASE}_view_model.dart';",
       "export '${TM_FILENAME_BASE}_view_model_factory.dart';",
       "$0"
     ]
   },
-  "AsyncRedux page": {
-    "prefix": "arpage",
-    "description": "AsyncRedux page",
+  "AsyncRedux widget": {
+    "prefix": "arwidget",
+    "description": "AsyncRedux widget",
     "body": [
       "import 'package:flutter/material.dart';",
       "",
-      "class ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/} extends StatelessWidget {",
+      "class ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}Widget extends StatelessWidget {",
       "  @override",
       "  Widget build(BuildContext context) => ${2:Container()};",
       "}",
       "$0"
     ]
   },
-  "AsyncRedux page connector": {
-    "prefix": "arpageconnector",
-    "description": "AsyncRedux page connector",
+  "AsyncRedux connector": {
+    "prefix": "arconnector",
+    "description": "AsyncRedux connector",
     "body": [
       "import 'package:flutter/material.dart';",
       "import 'package:async_redux/async_redux.dart';",
       "",
-      "import '${TM_FILENAME_BASE/(.*)_page_connector/$1/}.dart';",
+      "import '${TM_FILENAME_BASE/(.*)_connector/$1/}.dart';",
       "",
       "class ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/} extends StatelessWidget {",
       "  @override",
-      "  Widget build(BuildContext context) => StoreConnector<${1:St}, ${TM_FILENAME_BASE/(.*)_page_connector/${1:/pascalcase}ViewModel/}>(",
-      "        vm: () => ${TM_FILENAME_BASE/(.*)_page_connector/${1:/pascalcase}ViewModelFactory/}(),",
-      "        builder: (context, viewModel) => ${TM_FILENAME_BASE/(.*)_page_connector/${1:/pascalcase}Page/}($2),",
+      "  Widget build(BuildContext context) => StoreConnector<${1:St}, ${TM_FILENAME_BASE/(.*)_connector/${1:/pascalcase}ViewModel/}>(",
+      "        vm: () => ${TM_FILENAME_BASE/(.*)_connector/${1:/pascalcase}ViewModelFactory/}(),",
+      "        builder: (context, viewModel) => ${TM_FILENAME_BASE/(.*)_connector/${1:/pascalcase}/}Widget($3),",
       "      );",
       "}",
       "$0"
@@ -62,7 +62,7 @@
       "",
       "import '${TM_FILENAME_BASE/(.*)_view_model_factory/$1/}.dart';",
       "",
-      "class ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/} extends VmFactory<${1:St}, ${TM_FILENAME_BASE/(.*)_view_model_factory/${1:/pascalcase}PageConnector/}> {",
+      "class ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/} extends VmFactory<${1:St}, ${TM_FILENAME_BASE/(.*)_view_model_factory/${1:/pascalcase}Connector/}> {",
       "  @override",
       "  Vm fromStore() => ${TM_FILENAME_BASE/(.*)_view_model_factory/${1:/pascalcase}ViewModel/}($2);",
       "}",

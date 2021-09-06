@@ -3,6 +3,18 @@
     "prefix": "arstate",
     "description": "AsyncRedux state",
     "body": [
+      "class ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/} {",
+      "  ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}($1);",
+      "",
+      "  ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/} copyWith($2) => ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}($3);",
+      "}",
+      "$0"
+    ]
+  },
+  "AsyncRedux freezed state": {
+    "prefix": "arfreezedstate",
+    "description": "AsyncRedux freezed state",
+    "body": [
       "import 'package:freezed_annotation/freezed_annotation.dart';",
       "",
       "part '${TM_FILENAME_BASE}.freezed.dart';",

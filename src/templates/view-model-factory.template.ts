@@ -9,16 +9,18 @@ export function getViewModelFactoryTemplate(
   stateName: string,
   stateImportPath: string
 ): string {
-  const pascalCaseFeatureName = changeCase.pascalCase(featureName.toLowerCase());
+  const pascalCaseFeatureName = changeCase.pascalCase(
+    featureName.toLowerCase()
+  );
   const snakeCaseFeatureName = changeCase.snakeCase(featureName.toLowerCase());
 
   const viewModelFactoryName = `${pascalCaseFeatureName}ViewModelFactory`;
   const viewModelName = `${pascalCaseFeatureName}ViewModel`;
-  const pageConnectorName = `${pascalCaseFeatureName}PageConnector`;
+  const connectorName = `${pascalCaseFeatureName}Connector`;
 
   const viewModelFactoryTypeParameters = [
     ...(viewModelFactoryIncludeState ? [stateName] : []),
-    pageConnectorName,
+    connectorName,
   ].join(`, `);
 
   let reduxImports = `${constants.asyncRedux.importStatement}`;

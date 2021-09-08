@@ -16,6 +16,7 @@ export const config = {
       baseName: getActionBaseName,
       importPath: getActionImportPath,
       includeState: getActionIncludeState,
+      addToExports: getActionAddToExports,
     },
   },
   client: {
@@ -76,6 +77,10 @@ function getActionImportPath(): string {
 
 function getActionIncludeState(): boolean {
   return getConfigValue("business.action.includeState") ?? true
+}
+
+function getActionAddToExports(): boolean {
+  return getConfigValue("business.action.addToExports") ?? true
 }
 
 function getClientGenerateExports(): boolean {

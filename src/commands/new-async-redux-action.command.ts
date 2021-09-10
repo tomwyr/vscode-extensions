@@ -1,12 +1,14 @@
 import * as changeCase from "change-case"
 import { existsSync, lstatSync, writeFile } from "fs"
 import * as _ from "lodash"
+import { join } from "path"
 import { InputBoxOptions, OpenDialogOptions, Uri, window } from "vscode"
 import * as constants from "../constants"
 import { getActionTemplate } from "../templates"
 import {
   ActionType,
   asyncPickItem,
+  checkStateImportPathSet,
   config,
   getLastIndexWhere,
   readFileData,
@@ -51,6 +53,8 @@ export const newAsyncReduxAction = async (uri: Uri) => {
         ${error instanceof Error ? error.message : JSON.stringify(error)}`,
     )
   }
+
+  await checkStateImportPathSet()
 }
 
 function promptForActionName(): Thenable<string | undefined> {
@@ -100,7 +104,7 @@ async function generateActionCode(
 
 function getActionsDirectoryPath(targetDirectory: string): string {
   const actionsDirectoryName = constants.asyncRedux.actionsDirectory
-  const actionsDirectoryPath = `${targetDirectory}/${actionsDirectoryName}`
+  const actionsDirectoryPath = join(targetDirectory, actionsDirectoryName)
 
   return existsSync(actionsDirectoryPath)
     ? actionsDirectoryPath
@@ -114,7 +118,7 @@ async function createActionTemplate(
 ) {
   const snakeCaseActionName = changeCase.snake(actionName).toLowerCase()
   const targetFile = `${snakeCaseActionName}_action.dart`
-  const targetPath = `${targetDirectory}/${targetFile}`
+  const targetPath = join(targetDirectory, targetFile)
 
   const stateName = config.business.state.name()
   const stateImportPath = config.business.state.importPath()
@@ -123,9 +127,6 @@ async function createActionTemplate(
 
   let actionBaseName = config.business.action.baseName()
   if (actionIncludeState) actionBaseName += `<${stateName}>`
-
-  const actionImport = `import '${actionImportPath}';`
-  const stateImport = `import '${stateImportPath}';`
 
   if (existsSync(targetPath)) {
     throw Error(`${targetFile} already exists`)
@@ -137,10 +138,10 @@ async function createActionTemplate(
       getActionTemplate(
         actionName,
         actionBaseName,
-        actionImport,
+        actionImportPath,
         actionType,
         stateName,
-        stateImport,
+        stateImportPath,
       ),
       "utf8",
       (error) => {
@@ -161,7 +162,8 @@ async function addActionToFeatureExports(
   const featurePathItems = actionsDirectoryPath.split("/").slice(0, -1)
   const featurePath = featurePathItems.join("/")
   const featureName = featurePathItems[featurePathItems.length - 1]
-  const featureExportsPath = `${featurePath}/${featureName}.dart`
+  const featureFileName = `${featureName}.dart`
+  const featureExportsPath = join(featurePath, featureFileName)
 
   if (!existsSync(featureExportsPath)) return
 

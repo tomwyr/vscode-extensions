@@ -11,7 +11,8 @@ import {
   getViewModelTemplate,
   getViewModelFactoryTemplate,
 } from "../templates"
-import { config } from "../utils"
+import { checkStateImportPathSet, config } from "../utils"
+import { join } from "lodash"
 
 export const newAsyncReduxClientFeature = async (uri: Uri) => {
   const featureName = await promptForFeatureName()
@@ -43,6 +44,8 @@ export const newAsyncReduxClientFeature = async (uri: Uri) => {
         ${error instanceof Error ? error.message : JSON.stringify(error)}`,
     )
   }
+
+  await checkStateImportPathSet()
 }
 
 function promptForFeatureName(): Thenable<string | undefined> {
@@ -74,7 +77,7 @@ async function generateFeatureCode(
 ) {
   const generateExports = config.client.generateExports()
   const snakeCaseFeatureName = changeCase.snake(featureName).toLowerCase()
-  const featureDirectoryPath = `${targetDirectory}/${snakeCaseFeatureName}`
+  const featureDirectoryPath = join(targetDirectory, snakeCaseFeatureName)
 
   if (!existsSync(featureDirectoryPath)) {
     await createDirectory(featureDirectoryPath)
@@ -110,7 +113,7 @@ function createDirectory(targetDirectory: string): Promise<void> {
 function createExportsTemplate(featureName: string, targetDirectory: string) {
   const snakeCaseFeatureName = changeCase.snake(featureName).toLowerCase()
   const targetFile = `${snakeCaseFeatureName}.dart`
-  const targetPath = `${targetDirectory}/${targetFile}`
+  const targetPath = join(targetDirectory, targetFile)
 
   const widgetSuffix = config.client.widget.suffix()
   const connectorSuffix = config.client.connector.suffix()
@@ -164,7 +167,7 @@ function createWidgetTemplate(featureName: string, targetDirectory: string) {
   if (useFullFeatureNames) targetFile += `${snakeCaseFeatureName}_`
   targetFile += `${snakeCaseWidgetSuffix}.dart`
 
-  const targetPath = `${targetDirectory}/${targetFile}`
+  const targetPath = join(targetDirectory, targetFile)
 
   if (existsSync(targetPath)) {
     throw Error(`${targetFile} already exists`)
@@ -223,7 +226,7 @@ function createConnectorTemplate(featureName: string, targetDirectory: string) {
   }
   targetFile += ".dart"
 
-  const targetPath = `${targetDirectory}/${targetFile}`
+  const targetPath = join(targetDirectory, targetFile)
 
   if (existsSync(targetPath)) {
     throw Error(`${targetFile} already exists`)
@@ -266,7 +269,7 @@ async function createViewModelTemplate(
   if (useFullFeatureNames) targetFile += `${snakeCaseFeatureName}_`
   targetFile += "view_model.dart"
 
-  const targetPath = `${targetDirectory}/${targetFile}`
+  const targetPath = join(targetDirectory, targetFile)
 
   if (existsSync(targetPath)) {
     throw Error(`${targetFile} already exists`)
@@ -303,7 +306,7 @@ function createViewModelFactoryTemplate(
   if (useFullFeatureNames) targetFile += `${snakeCaseFeatureName}_`
   targetFile += "view_model_factory.dart"
 
-  const targetPath = `${targetDirectory}/${targetFile}`
+  const targetPath = join(targetDirectory, targetFile)
 
   if (existsSync(targetPath)) {
     throw Error(`${targetFile} already exists`)

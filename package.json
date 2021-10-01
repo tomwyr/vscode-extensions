@@ -2,7 +2,7 @@
   "name": "dart-move-symbol",
   "displayName": "Dart Move Symbol",
   "description": "Provides commands and keybindings for moving Dart symbols in text editor.",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "publisher": "tomwyr",
   "license": "MIT",
   "repository": {

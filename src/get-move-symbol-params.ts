@@ -7,13 +7,13 @@ export function getMoveSymbolParams(
   const bottomSymbolNewPosition = getBottomSymbolNewPosition(swapLines)
   const bottomSymbolRange = getBottomSymbolRange(swapLines)
   const blankSpaceRange = getBlankSpaceRange(swapLines, bottomSymbolRange)
-  const selectionLineDelta = getSelectionLineDelta(swapLines)
+  const selectionStartLineDelta = getSelectionStartLineDelta(swapLines)
 
   return {
     bottomSymbolNewPosition: bottomSymbolNewPosition,
     bottomSymbolRange: bottomSymbolRange,
     blankSpaceRange: blankSpaceRange,
-    selectionLineDelta: selectionLineDelta,
+    selectionStartLineDelta: selectionStartLineDelta,
   }
 }
 
@@ -39,7 +39,7 @@ function getBlankSpaceRange(
   swapLines: ResolvedSymbolSwapLines,
   bottomSymbolRange: Range,
 ): Range {
-  const startLine = swapLines.blankStartLine + 1
+  const startLine = swapLines.blankSpaceStartLine + 1
   const endLine = bottomSymbolRange.start.line
 
   const start = new Position(startLine, 0)
@@ -48,6 +48,8 @@ function getBlankSpaceRange(
   return new Range(start, end)
 }
 
-function getSelectionLineDelta(swapLines: ResolvedSymbolSwapLines): number {
+function getSelectionStartLineDelta(
+  swapLines: ResolvedSymbolSwapLines,
+): number {
   return swapLines.selectionDeltaStartLine - swapLines.selectionDeltaEndLine
 }

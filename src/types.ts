@@ -22,7 +22,7 @@ export type ResolvedSymbolSwapLines = {
   bottomSymbolNewPositionLine: number
   bottomSymbolStartLine: number
   bottomSymbolEndLine: number
-  blankStartLine: number
+  blankSpaceStartLine: number
   selectionDeltaStartLine: number
   selectionDeltaEndLine: number
 }
@@ -31,5 +31,5 @@ export type MoveSymbolParams = {
   bottomSymbolNewPosition: Position
   bottomSymbolRange: Range
   blankSpaceRange: Range
-  selectionLineDelta: number
+  selectionStartLineDelta: number
 }

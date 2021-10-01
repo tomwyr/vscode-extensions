@@ -13,7 +13,7 @@ export function getResolvedSymbolSwapLines(
         bottomSymbolNewPositionLine: swapLines.adjacentSymbolStartLine,
         bottomSymbolStartLine: swapLines.selectedSymbolStartLine,
         bottomSymbolEndLine: swapLines.selectedSymbolEndLine,
-        blankStartLine: swapLines.adjacentSymbolEndLine,
+        blankSpaceStartLine: swapLines.adjacentSymbolEndLine,
         selectionDeltaStartLine: swapLines.adjacentSymbolStartLine,
         selectionDeltaEndLine: swapLines.selectedSymbolStartLine,
       }
@@ -21,7 +21,7 @@ export function getResolvedSymbolSwapLines(
         bottomSymbolNewPositionLine: swapLines.selectedSymbolStartLine,
         bottomSymbolStartLine: swapLines.adjacentSymbolStartLine,
         bottomSymbolEndLine: swapLines.adjacentSymbolEndLine,
-        blankStartLine: swapLines.selectedSymbolEndLine,
+        blankSpaceStartLine: swapLines.selectedSymbolEndLine,
         selectionDeltaStartLine: swapLines.adjacentSymbolEndLine,
         selectionDeltaEndLine: swapLines.selectedSymbolEndLine,
       }

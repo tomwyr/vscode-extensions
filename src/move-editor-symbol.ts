@@ -23,11 +23,11 @@ function moveSymbolSelection(editor: TextEditor, params: MoveSymbolParams) {
   const active = editor.selection.active
 
   const newAnchor = new Position(
-    anchor.line + params.selectionLineDelta,
+    anchor.line + params.selectionStartLineDelta,
     anchor.character,
   )
   const newActive = new Position(
-    active.line + params.selectionLineDelta,
+    active.line + params.selectionStartLineDelta,
     active.character,
   )
 

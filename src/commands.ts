@@ -28,7 +28,7 @@ async function moveSymbol(direction: MoveSymbolDirection) {
   const symbolSearchResult = findSelectedSymbol(selection, documentSymbols)
   if (symbolSearchResult == undefined) return
 
-  const moveSymbolParams = await getEditorMoveParams(
+  const moveSymbolParams = await getEditorMoveSymbolParams(
     document,
     symbolSearchResult,
     direction,
@@ -38,7 +38,7 @@ async function moveSymbol(direction: MoveSymbolDirection) {
   moveEditorSymbol(editor, moveSymbolParams)
 }
 
-async function getEditorMoveParams(
+async function getEditorMoveSymbolParams(
   document: TextDocument,
   searchResult: SymbolSearchResult,
   direction: MoveSymbolDirection,

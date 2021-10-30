@@ -49,19 +49,19 @@
           },
           "async-redux.business.generateExports": {
             "type": "boolean",
-            "description": "Whether to export state in a barrel file.",
+            "description": "Whether to barrel file for created business feature.",
             "default": true
           },
           "async-redux.business.state.name": {
             "type": "string",
-            "description": "Name of state class.",
+            "description": "Name of the state class.",
             "default": "AppState",
             "pattern": "^.+$",
             "patternErrorMessage": "Value cannot be empty"
           },
           "async-redux.business.state.importPath": {
             "type": "string",
-            "description": "Import path pointing to state class.",
+            "description": "Import path pointing to the state class.",
             "default": "",
             "pattern": "^(.+\\.dart)?$",
             "patternErrorMessage": "Value has to be valid Dart file import path"
@@ -97,7 +97,7 @@
           },
           "async-redux.client.generateExports": {
             "type": "boolean",
-            "description": "Whether to export connector in a barrel file.",
+            "description": "Whether to generate barrel file for created client feature.",
             "default": true
           },
           "async-redux.client.injectViewModel": {
@@ -217,21 +217,19 @@
   },
   "devDependencies": {
     "@types/change-case": "^2.3.1",
-    "@types/js-yaml": "^4.0.3",
-    "@types/lodash": "^4.14.121",
+    "@types/js-yaml": "^4.0.4",
     "@types/mkdirp": "^0.5.2",
-    "@types/node": "^12.7.8",
-    "@types/vscode": "^1.56.0",
+    "@types/node": "^12.20.36",
+    "@types/vscode": "^1.61.0",
     "ts-loader": "^6.2.1",
     "tslint": "^5.12.1",
-    "typescript": "^3.5.1",
-    "webpack": "^5.19.0",
-    "webpack-cli": "^4.8.0"
+    "typescript": "^3.9.10",
+    "webpack": "^5.61.0",
+    "webpack-cli": "^4.9.1"
   },
   "dependencies": {
     "change-case": "^3.1.0",
     "js-yaml": "^4.1.0",
-    "lodash": "^4.17.19",
     "mkdirp": "^0.5.1"
   }
 }

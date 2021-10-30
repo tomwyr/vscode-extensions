@@ -1,36 +1,28 @@
-import * as _ from "lodash"
-
-import { commands, ExtensionContext, languages } from "vscode"
-import {
-  newAsyncReduxClientFeature,
-  newAsyncReduxBusinessFeature,
-  newAsyncReduxAction,
-} from "./commands"
+import * as vscode from "vscode"
+import * as commands from "./commands"
 import * as constants from "./constants"
-import {
-  newAsyncReduxActionCommand,
-  newAsyncReduxBusinessFeatureCommand,
-  newAsyncReduxClientFeatureCommand,
-} from "./constants/extension"
-import { SnippetCompletionItemProvider } from "./providers/snippet_completion_item_provider"
+import { SnippetCompletionItemProvider } from "./providers"
 
-export function activate(context: ExtensionContext) {
+export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(
-    languages.registerCompletionItemProvider(
+    vscode.languages.registerCompletionItemProvider(
       constants.vscode.dartFileSelector,
       new SnippetCompletionItemProvider(context.extensionPath),
     ),
   )
 
   context.subscriptions.push(
-    commands.registerCommand(newAsyncReduxActionCommand, newAsyncReduxAction),
-    commands.registerCommand(
-      newAsyncReduxBusinessFeatureCommand,
-      newAsyncReduxBusinessFeature,
+    vscode.commands.registerCommand(
+      constants.extension.newActionCommandId,
+      commands.newActionCommand,
     ),
-    commands.registerCommand(
-      newAsyncReduxClientFeatureCommand,
-      newAsyncReduxClientFeature,
+    vscode.commands.registerCommand(
+      constants.extension.newBusinessFeatureCommandId,
+      commands.newBusinessFeatureCommand,
+    ),
+    vscode.commands.registerCommand(
+      constants.extension.newClientFeatureCommandId,
+      commands.newClientFeatureCommand,
     ),
   )
 }

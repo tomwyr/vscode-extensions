@@ -4,6 +4,6 @@ const extensionId = "async-redux"
 export const configId = extensionId
 export const publishedExtensionId = `${publisher}.${extensionId}`
 
-export const newAsyncReduxActionCommand = `${extensionId}.new-action`
-export const newAsyncReduxBusinessFeatureCommand = `${extensionId}.new-business-feature`
-export const newAsyncReduxClientFeatureCommand = `${extensionId}.new-client-feature`
+export const newActionCommandId = `${extensionId}.new-action`
+export const newBusinessFeatureCommandId = `${extensionId}.new-business-feature`
+export const newClientFeatureCommandId = `${extensionId}.new-client-feature`

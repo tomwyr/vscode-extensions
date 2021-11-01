@@ -10,21 +10,21 @@ export function getSymbolSwapLines(
 ): SymbolSwapLines {
   return direction == MoveSymbolDirection.up
     ? {
-        bottomSymbolNewPositionLine: swapLines.adjacentSymbolStartLine,
-        bottomSymbolStartLine: swapLines.selectedSymbolStartLine,
-        bottomSymbolEndLine: swapLines.selectedSymbolEndLine,
-        blankSpaceStartLine: swapLines.adjacentSymbolEndLine,
-        selectionDeltaStartLine: swapLines.adjacentSymbolStartLine,
-        selectionDeltaEndLine: swapLines.selectedSymbolStartLine,
-        selectedSymbolStartLine: swapLines.selectedSymbolStartLine,
+        bottomSymbolNewStart: swapLines.adjacentSymbolStart,
+        bottomSymbolStart: swapLines.selectedSymbolStart,
+        bottomSymbolEnd: swapLines.selectedSymbolEnd,
+        blankSpaceStart: swapLines.adjacentSymbolEnd,
+        selectedSymbolStart: swapLines.selectedSymbolStart,
+        selectedSymbolDeltaStart: swapLines.adjacentSymbolStart,
+        selectedSymbolDeltaEnd: swapLines.selectedSymbolStart,
       }
     : {
-        bottomSymbolNewPositionLine: swapLines.selectedSymbolStartLine,
-        bottomSymbolStartLine: swapLines.adjacentSymbolStartLine,
-        bottomSymbolEndLine: swapLines.adjacentSymbolEndLine,
-        blankSpaceStartLine: swapLines.selectedSymbolEndLine,
-        selectionDeltaStartLine: swapLines.adjacentSymbolEndLine,
-        selectionDeltaEndLine: swapLines.selectedSymbolEndLine,
-        selectedSymbolStartLine: swapLines.selectedSymbolStartLine,
+        bottomSymbolNewStart: swapLines.selectedSymbolStart,
+        bottomSymbolStart: swapLines.adjacentSymbolStart,
+        bottomSymbolEnd: swapLines.adjacentSymbolEnd,
+        blankSpaceStart: swapLines.selectedSymbolEnd,
+        selectedSymbolStart: swapLines.selectedSymbolStart,
+        selectedSymbolDeltaStart: swapLines.adjacentSymbolEnd,
+        selectedSymbolDeltaEnd: swapLines.selectedSymbolEnd,
       }
 }

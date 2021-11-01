@@ -19,10 +19,10 @@ export async function getRelativeSymbolSwapLines(
   if (adjacentSymbol == undefined) return
 
   const swapLines = {
-    selectedSymbolStartLine: selectedSymbol.range.start.line,
-    selectedSymbolEndLine: selectedSymbol.range.end.line,
-    adjacentSymbolStartLine: adjacentSymbol.range.start.line,
-    adjacentSymbolEndLine: adjacentSymbol.range.end.line,
+    selectedSymbolStart: selectedSymbol.range.start.line,
+    selectedSymbolEnd: selectedSymbol.range.end.line,
+    adjacentSymbolStart: adjacentSymbol.range.start.line,
+    adjacentSymbolEnd: adjacentSymbol.range.end.line,
   }
 
   const swapLinesIncludingAnnotations = includeSymbolAnnotations(
@@ -38,16 +38,16 @@ function includeSymbolAnnotations(
   moveLines: RelativeSymbolSwapLines,
 ): RelativeSymbolSwapLines {
   const selectedSymbolStartLineIncludingAnnotations =
-    getLineIncludingAnnotations(document, moveLines.selectedSymbolStartLine)
+    getLineIncludingAnnotations(document, moveLines.selectedSymbolStart)
 
   const adjacentSymbolStartLineIncludingAnnotations =
-    getLineIncludingAnnotations(document, moveLines.adjacentSymbolStartLine)
+    getLineIncludingAnnotations(document, moveLines.adjacentSymbolStart)
 
   return {
-    selectedSymbolStartLine: selectedSymbolStartLineIncludingAnnotations,
-    selectedSymbolEndLine: moveLines.selectedSymbolEndLine,
-    adjacentSymbolStartLine: adjacentSymbolStartLineIncludingAnnotations,
-    adjacentSymbolEndLine: moveLines.adjacentSymbolEndLine,
+    selectedSymbolStart: selectedSymbolStartLineIncludingAnnotations,
+    selectedSymbolEnd: moveLines.selectedSymbolEnd,
+    adjacentSymbolStart: adjacentSymbolStartLineIncludingAnnotations,
+    adjacentSymbolEnd: moveLines.adjacentSymbolEnd,
   }
 }
 

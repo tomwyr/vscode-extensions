@@ -1,5 +1,5 @@
 import { Position, Range, Selection, TextEditor } from "vscode"
-import { MoveSymbolParams } from "../types"
+import { MoveSymbolParams, Span } from "../types"
 
 export function moveEditorSymbol(editor: TextEditor, params: MoveSymbolParams) {
   moveSymbolText(editor, params)
@@ -8,15 +8,29 @@ export function moveEditorSymbol(editor: TextEditor, params: MoveSymbolParams) {
 }
 
 function moveSymbolText(editor: TextEditor, params: MoveSymbolParams) {
-  const symbolText = editor.document.getText(params.bottomSymbolRange)
-  const blankText = editor.document.getText(params.blankSpaceRange)
+  const bottomSymbolRange = getSpanRange(params.bottomSymbolSpan)
+  const blankSpaceRange = getSpanRange(params.blankSpaceSpan)
+  const bottomSymbolNewPosition = getLinePosition(
+    params.bottomSymbolNewStartLine,
+  )
+
+  const symbolText = editor.document.getText(bottomSymbolRange)
+  const blankText = editor.document.getText(blankSpaceRange)
 
   editor.edit((editBuilder) => {
-    editBuilder.delete(params.bottomSymbolRange)
-    editBuilder.delete(params.blankSpaceRange)
-    editBuilder.insert(params.bottomSymbolNewPosition, symbolText)
-    editBuilder.insert(params.bottomSymbolNewPosition, blankText)
+    editBuilder.delete(bottomSymbolRange)
+    editBuilder.delete(blankSpaceRange)
+    editBuilder.insert(bottomSymbolNewPosition, symbolText)
+    editBuilder.insert(bottomSymbolNewPosition, blankText)
   })
+}
+
+function getSpanRange(span: Span): Range {
+  return new Range(new Position(span.start, 0), new Position(span.end, 0))
+}
+
+function getLinePosition(line: number): Position {
+  return new Position(line, 0)
 }
 
 function moveSymbolSelection(editor: TextEditor, params: MoveSymbolParams) {
@@ -24,11 +38,11 @@ function moveSymbolSelection(editor: TextEditor, params: MoveSymbolParams) {
   const active = editor.selection.active
 
   const newAnchor = new Position(
-    anchor.line + params.selectionStartLineDelta,
+    anchor.line + params.selectedSymbolDelta,
     anchor.character,
   )
   const newActive = new Position(
-    active.line + params.selectionStartLineDelta,
+    active.line + params.selectedSymbolDelta,
     active.character,
   )
 
@@ -42,7 +56,7 @@ function updateVisibleRange(editor: TextEditor, params: MoveSymbolParams) {
   const visibleEndLine =
     editor.visibleRanges[editor.visibleRanges.length - 1].end.line
 
-  const newStartLine = params.selectedSymbolNewPosition.line
+  const newStartLine = params.selectedSymbolNewStartLine
 
   const lineNextToFirstVisible = visibleStartLine + 1
   const linePriorToLastVisible = visibleEndLine - 1

@@ -1,4 +1,4 @@
-import { DocumentSymbol, Position, Range } from "vscode"
+import { DocumentSymbol } from "vscode"
 
 export enum MoveSymbolDirection {
   up,
@@ -12,26 +12,31 @@ export type SymbolSearchResult = {
 }
 
 export type RelativeSymbolSwapLines = {
-  selectedSymbolStartLine: number
-  selectedSymbolEndLine: number
-  adjacentSymbolStartLine: number
-  adjacentSymbolEndLine: number
+  selectedSymbolStart: number
+  selectedSymbolEnd: number
+  adjacentSymbolStart: number
+  adjacentSymbolEnd: number
 }
 
 export type SymbolSwapLines = {
-  bottomSymbolNewPositionLine: number
-  bottomSymbolStartLine: number
-  bottomSymbolEndLine: number
-  blankSpaceStartLine: number
-  selectionDeltaStartLine: number
-  selectionDeltaEndLine: number
-  selectedSymbolStartLine: number
+  bottomSymbolNewStart: number
+  bottomSymbolStart: number
+  bottomSymbolEnd: number
+  blankSpaceStart: number
+  selectedSymbolStart: number
+  selectedSymbolDeltaStart: number
+  selectedSymbolDeltaEnd: number
+}
+
+export type Span = {
+  start: number
+  end: number
 }
 
 export type MoveSymbolParams = {
-  bottomSymbolNewPosition: Position
-  bottomSymbolRange: Range
-  blankSpaceRange: Range
-  selectionStartLineDelta: number
-  selectedSymbolNewPosition: Position
+  bottomSymbolNewStartLine: number
+  bottomSymbolSpan: Span
+  blankSpaceSpan: Span
+  selectedSymbolDelta: number
+  selectedSymbolNewStartLine: number
 }

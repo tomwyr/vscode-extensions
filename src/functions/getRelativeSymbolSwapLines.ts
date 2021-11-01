@@ -1,15 +1,15 @@
 import { TextDocument } from "vscode"
 import {
   MoveSymbolDirection,
-  SymbolSwapLines,
+  RelativeSymbolSwapLines,
   SymbolSearchResult,
-} from "./types"
+} from "../types"
 
-export async function getSymbolSwapLines(
+export async function getRelativeSymbolSwapLines(
   document: TextDocument,
   searchResult: SymbolSearchResult,
   direction: MoveSymbolDirection,
-): Promise<SymbolSwapLines | undefined> {
+): Promise<RelativeSymbolSwapLines | undefined> {
   const selectedSymbol = searchResult.searched
   const adjacentSymbol =
     direction == MoveSymbolDirection.up
@@ -35,8 +35,8 @@ export async function getSymbolSwapLines(
 
 function includeSymbolAnnotations(
   document: TextDocument,
-  moveLines: SymbolSwapLines,
-): SymbolSwapLines {
+  moveLines: RelativeSymbolSwapLines,
+): RelativeSymbolSwapLines {
   const selectedSymbolStartLineIncludingAnnotations =
     getLineIncludingAnnotations(document, moveLines.selectedSymbolStartLine)
 

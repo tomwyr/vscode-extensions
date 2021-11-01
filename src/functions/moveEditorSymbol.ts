@@ -1,5 +1,5 @@
 import { Position, Selection, TextEditor } from "vscode"
-import { MoveSymbolParams } from "./types"
+import { MoveSymbolParams } from "../types"
 
 export function moveEditorSymbol(editor: TextEditor, params: MoveSymbolParams) {
   moveSymbolText(editor, params)

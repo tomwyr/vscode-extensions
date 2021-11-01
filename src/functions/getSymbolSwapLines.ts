@@ -1,13 +1,13 @@
 import {
-  ResolvedSymbolSwapLines,
-  MoveSymbolDirection,
   SymbolSwapLines,
-} from "./types"
+  MoveSymbolDirection,
+  RelativeSymbolSwapLines,
+} from "../types"
 
-export function getResolvedSymbolSwapLines(
-  swapLines: SymbolSwapLines,
+export function getSymbolSwapLines(
+  swapLines: RelativeSymbolSwapLines,
   direction: MoveSymbolDirection,
-): ResolvedSymbolSwapLines {
+): SymbolSwapLines {
   return direction == MoveSymbolDirection.up
     ? {
         bottomSymbolNewPositionLine: swapLines.adjacentSymbolStartLine,

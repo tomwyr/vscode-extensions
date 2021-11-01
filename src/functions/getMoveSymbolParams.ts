@@ -1,8 +1,8 @@
 import { Position, Range } from "vscode"
-import { MoveSymbolParams, ResolvedSymbolSwapLines } from "./types"
+import { MoveSymbolParams, SymbolSwapLines } from "../types"
 
 export function getMoveSymbolParams(
-  swapLines: ResolvedSymbolSwapLines,
+  swapLines: SymbolSwapLines,
 ): MoveSymbolParams {
   const bottomSymbolNewPosition = getBottomSymbolNewPosition(swapLines)
   const bottomSymbolRange = getBottomSymbolRange(swapLines)
@@ -17,15 +17,13 @@ export function getMoveSymbolParams(
   }
 }
 
-function getBottomSymbolNewPosition(
-  swapLines: ResolvedSymbolSwapLines,
-): Position {
+function getBottomSymbolNewPosition(swapLines: SymbolSwapLines): Position {
   const line = swapLines.bottomSymbolNewPositionLine
 
   return new Position(line, 0)
 }
 
-function getBottomSymbolRange(swapLines: ResolvedSymbolSwapLines): Range {
+function getBottomSymbolRange(swapLines: SymbolSwapLines): Range {
   const startLine = swapLines.bottomSymbolStartLine
   const endLine = swapLines.bottomSymbolEndLine + 1
 
@@ -36,7 +34,7 @@ function getBottomSymbolRange(swapLines: ResolvedSymbolSwapLines): Range {
 }
 
 function getBlankSpaceRange(
-  swapLines: ResolvedSymbolSwapLines,
+  swapLines: SymbolSwapLines,
   bottomSymbolRange: Range,
 ): Range {
   const startLine = swapLines.blankSpaceStartLine + 1
@@ -48,8 +46,6 @@ function getBlankSpaceRange(
   return new Range(start, end)
 }
 
-function getSelectionStartLineDelta(
-  swapLines: ResolvedSymbolSwapLines,
-): number {
+function getSelectionStartLineDelta(swapLines: SymbolSwapLines): number {
   return swapLines.selectionDeltaStartLine - swapLines.selectionDeltaEndLine
 }

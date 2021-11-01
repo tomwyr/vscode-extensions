@@ -1,5 +1,5 @@
 import { DocumentSymbol, Selection } from "vscode"
-import { SymbolSearchResult } from "./types"
+import { SymbolSearchResult } from "../types"
 
 export function findSelectedSymbol(
   selection: Selection,

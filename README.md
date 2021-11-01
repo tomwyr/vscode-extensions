@@ -6,4 +6,4 @@ Provides commands and keybindings for moving Dart symbols in text editor.
 
 Put editor cursor on a symbol you want to move in your source file and press:  
 `⌃⌥↑` to move symbol up  
-`⌃⌥↓` to move symbol down  
+`⌃⌥↓` to move symbol down

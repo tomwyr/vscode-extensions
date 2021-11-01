@@ -11,14 +11,14 @@ export type SymbolSearchResult = {
   next: DocumentSymbol | undefined
 }
 
-export type SymbolSwapLines = {
+export type RelativeSymbolSwapLines = {
   selectedSymbolStartLine: number
   selectedSymbolEndLine: number
   adjacentSymbolStartLine: number
   adjacentSymbolEndLine: number
 }
 
-export type ResolvedSymbolSwapLines = {
+export type SymbolSwapLines = {
   bottomSymbolNewPositionLine: number
   bottomSymbolStartLine: number
   bottomSymbolEndLine: number

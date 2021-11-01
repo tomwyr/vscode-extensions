@@ -16,6 +16,7 @@ export function getSymbolSwapLines(
         blankSpaceStartLine: swapLines.adjacentSymbolEndLine,
         selectionDeltaStartLine: swapLines.adjacentSymbolStartLine,
         selectionDeltaEndLine: swapLines.selectedSymbolStartLine,
+        selectedSymbolStartLine: swapLines.selectedSymbolStartLine,
       }
     : {
         bottomSymbolNewPositionLine: swapLines.selectedSymbolStartLine,
@@ -24,5 +25,6 @@ export function getSymbolSwapLines(
         blankSpaceStartLine: swapLines.selectedSymbolEndLine,
         selectionDeltaStartLine: swapLines.adjacentSymbolEndLine,
         selectionDeltaEndLine: swapLines.selectedSymbolEndLine,
+        selectedSymbolStartLine: swapLines.selectedSymbolStartLine,
       }
 }

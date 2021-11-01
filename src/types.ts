@@ -25,6 +25,7 @@ export type SymbolSwapLines = {
   blankSpaceStartLine: number
   selectionDeltaStartLine: number
   selectionDeltaEndLine: number
+  selectedSymbolStartLine: number
 }
 
 export type MoveSymbolParams = {
@@ -32,4 +33,5 @@ export type MoveSymbolParams = {
   bottomSymbolRange: Range
   blankSpaceRange: Range
   selectionStartLineDelta: number
+  selectedSymbolNewPosition: Position
 }

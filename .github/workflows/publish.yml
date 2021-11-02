@@ -24,12 +24,12 @@ jobs:
           npm install -g vsce
 
       - name: "Package extension"
-        run: vsce package --out async-redux.vsix
+        run: vsce package --out dart-move-symbol.vsix
         env:
           VSCE_PAT: ${{ secrets.VSCE_PAT }}
 
       - name: "Publish to GitHub"
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "async-redux.vsix"
+          artifacts: "dart-move-symbol.vsix"
           token: ${{ secrets.GITHUB_TOKEN }}

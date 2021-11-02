@@ -26,6 +26,6 @@ jobs:
         run: npx prettier --check .
 
       - name: "Package extension"
-        run: vsce package --out async-redux.vsix
+        run: vsce package --out dart-move-symbol.vsix
         env:
           VSCE_PAT: ${{ secrets.VSCE_PAT }}

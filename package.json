@@ -38,11 +38,13 @@
     "keybindings": [
       {
         "command": "dart-move-symbol.up",
-        "key": "ctrl+alt+up"
+        "key": "ctrl+alt+up",
+        "when": "editorLangId == dart"
       },
       {
         "command": "dart-move-symbol.down",
-        "key": "ctrl+alt+down"
+        "key": "ctrl+alt+down",
+        "when": "editorLangId == dart"
       }
     ]
   },

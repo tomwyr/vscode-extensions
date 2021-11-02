@@ -69,9 +69,9 @@ function updateVisibleRange(editor: TextEditor, params: MoveSymbolParams) {
   const visibleRangeSpan = visibleEndLine - visibleStartLine
 
   const targetStartLine =
-    newStartLine < visibleStartLine + 1
-      ? Math.max(lineNextToFirstVisible, 0)
-      : Math.min(linePriorToLastVisible - visibleRangeSpan, documentEndLine)
+    newStartLine < lineNextToFirstVisible
+      ? Math.max(newStartLine - 1, 0)
+      : Math.min(newStartLine + 1 - visibleRangeSpan, documentEndLine)
 
   const targetEndLine = targetStartLine + visibleRangeSpan
 

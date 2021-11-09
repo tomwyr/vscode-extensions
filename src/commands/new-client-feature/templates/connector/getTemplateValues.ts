@@ -64,8 +64,7 @@ async function getImports(
   const imports = `${materialImport}
 ${reduxImports}
 
-${featureImports}
-`
+${featureImports}`
 
   return imports
 }

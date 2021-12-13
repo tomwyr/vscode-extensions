@@ -1,7 +1,12 @@
 {
 	"name": "color-namer",
 	"displayName": "color-namer",
-	"description": "Fetch name for color representation",
+	"description": "Display names of color codes",
+	"publisher": "tomwyr",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/tomwyr/color-name"
+	},
 	"version": "0.0.1",
 	"engines": {
 		"vscode": "^1.63.0"
@@ -10,17 +15,9 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:color-namer.helloWorld"
+		"onLanguage:dart"
 	],
 	"main": "./out/extension.js",
-	"contributes": {
-		"commands": [
-			{
-				"command": "color-namer.helloWorld",
-				"title": "Hello World"
-			}
-		]
-	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
 		"compile": "tsc -p ./",
@@ -29,7 +26,11 @@
 		"lint": "eslint src --ext ts",
 		"test": "node ./out/test/runTest.js"
 	},
+	"dependencies": {
+		"node-fetch": "^2.6.1"
+	},
 	"devDependencies": {
+		"@types/node-fetch": "^2.5.12",
 		"@types/vscode": "^1.63.0",
 		"@types/glob": "^7.1.4",
 		"@types/mocha": "^9.0.0",

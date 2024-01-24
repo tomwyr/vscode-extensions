@@ -1,0 +1,235 @@
+{
+  "name": "async-redux",
+  "displayName": "Async Redux",
+  "description": "Provides snippets and commands for Async Redux state management library.",
+  "version": "1.1.8",
+  "publisher": "tomwyr",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tomwyr/async-redux-vscode"
+  },
+  "engines": {
+    "vscode": "^1.61.0"
+  },
+  "categories": [
+    "Snippets",
+    "Programming Languages"
+  ],
+  "keywords": [
+    "dart",
+    "flutter",
+    "asyncredux",
+    "statemanagement"
+  ],
+  "activationEvents": [
+    "onLanguage:dart",
+    "workspaceContains:**/pubspec.yaml"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "configuration": [
+      {
+        "title": "Async Redux",
+        "properties": {
+          "async-redux.general.enableSnippets": {
+            "type": "boolean",
+            "description": "Whether to include snippets in code completion",
+            "default": true
+          },
+          "async-redux.general.useFullFeatureNames": {
+            "type": "boolean",
+            "description": "Whether to include feature name in generated files and classes names.",
+            "default": true
+          },
+          "async-redux.general.useAbsoluteImports": {
+            "type": "boolean",
+            "description": "Whether to generate absolute imports for files from the same feature.",
+            "default": false
+          },
+          "async-redux.business.generateExports": {
+            "type": "boolean",
+            "description": "Whether to barrel file for created business feature.",
+            "default": true
+          },
+          "async-redux.business.state.name": {
+            "type": "string",
+            "description": "Name of the state class.",
+            "default": "AppState",
+            "pattern": "^.+$",
+            "patternErrorMessage": "Value cannot be empty"
+          },
+          "async-redux.business.state.importPath": {
+            "type": "string",
+            "description": "Import path pointing to the state class.",
+            "default": "",
+            "pattern": "^(.+\\.dart)?$",
+            "patternErrorMessage": "Value has to be valid Dart file import path"
+          },
+          "async-redux.business.state.generateFreezed": {
+            "type": "boolean",
+            "description": "Whether to generate state as a freezed class.",
+            "default": false
+          },
+          "async-redux.business.action.baseName": {
+            "type": "string",
+            "description": "Name of base action class.",
+            "default": "ReduxAction",
+            "pattern": "^.+$",
+            "patternErrorMessage": "Value cannot be empty"
+          },
+          "async-redux.business.action.importPath": {
+            "type": "string",
+            "description": "Import path pointing to base action class.",
+            "default": "package:async_redux/async_redux.dart",
+            "pattern": "^(.+\\.dart)?$",
+            "patternErrorMessage": "Value has to be valid Dart file import path"
+          },
+          "async-redux.business.action.includeState": {
+            "type": "boolean",
+            "description": "Whether to include state in action type parameters.",
+            "default": true
+          },
+          "async-redux.business.action.addToExports": {
+            "type": "boolean",
+            "description": "Whether to add new action export to barrel file (if exists).",
+            "default": true
+          },
+          "async-redux.client.generateExports": {
+            "type": "boolean",
+            "description": "Whether to generate barrel file for created client feature.",
+            "default": true
+          },
+          "async-redux.client.injectViewModel": {
+            "type": "boolean",
+            "description": "Whether to make connector inject view model to widget as a single object.",
+            "default": false
+          },
+          "async-redux.client.widget.suffix": {
+            "type": "string",
+            "default": "Widget",
+            "description": "Suffix appended to widget name.",
+            "pattern": "^.+$",
+            "patternErrorMessage": "Value cannot be empty"
+          },
+          "async-redux.client.connector.suffix": {
+            "type": "string",
+            "default": "Widget",
+            "description": "Suffix appended to connector name."
+          },
+          "async-redux.client.connector.includeWidgetSuffix": {
+            "type": "boolean",
+            "default": false,
+            "description": "Whether to include widget suffix at the end of connector name."
+          },
+          "async-redux.client.viewModel.baseName": {
+            "type": "string",
+            "description": "Name of base view model class.",
+            "default": "Vm",
+            "pattern": "^.+$",
+            "patternErrorMessage": "Value cannot be empty"
+          },
+          "async-redux.client.viewModel.importPath": {
+            "type": "string",
+            "description": "Import path pointing to base view model class.",
+            "default": "package:async_redux/async_redux.dart",
+            "pattern": "^(.+\\.dart)?$",
+            "patternErrorMessage": "Value has to be valid Dart file import path"
+          },
+          "async-redux.client.viewModelFactory.baseName": {
+            "type": "string",
+            "description": "Name of the base view model factory class.",
+            "default": "VmFactory",
+            "pattern": "^.+$",
+            "patternErrorMessage": "Value cannot be empty"
+          },
+          "async-redux.client.viewModelFactory.importPath": {
+            "type": "string",
+            "description": "Import path pointing to base view model factory class.",
+            "default": "package:async_redux/async_redux.dart",
+            "pattern": "^(.+\\.dart)?$",
+            "patternErrorMessage": "Value has to be valid Dart file import path"
+          },
+          "async-redux.client.viewModelFactory.includeState": {
+            "type": "boolean",
+            "default": true,
+            "description": "Whether to include state in view model factory type parameters."
+          }
+        }
+      }
+    ],
+    "commands": [
+      {
+        "command": "async-redux.new-action",
+        "title": "New Action",
+        "category": "Async Redux"
+      },
+      {
+        "command": "async-redux.new-business-feature",
+        "title": "New Business Feature",
+        "category": "Async Redux"
+      },
+      {
+        "command": "async-redux.new-client-feature",
+        "title": "New Client Feature",
+        "category": "Async Redux"
+      }
+    ],
+    "submenus": [
+      {
+        "id": "async-redux",
+        "label": "Async Redux"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "submenu": "async-redux",
+          "group": "async-redux"
+        }
+      ],
+      "async-redux": [
+        {
+          "command": "async-redux.new-action",
+          "group": "async-redux",
+          "when": "explorerResourceIsFolder"
+        },
+        {
+          "command": "async-redux.new-business-feature",
+          "group": "async-redux",
+          "when": "explorerResourceIsFolder"
+        },
+        {
+          "command": "async-redux.new-client-feature",
+          "group": "async-redux",
+          "when": "explorerResourceIsFolder"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "webpack --mode production",
+    "webpack": "webpack --mode development",
+    "webpack-dev": "webpack --mode development --watch",
+    "test-compile": "tsc -p ./",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/change-case": "^2.3.1",
+    "@types/js-yaml": "^4.0.4",
+    "@types/mkdirp": "^0.5.2",
+    "@types/node": "^12.20.36",
+    "@types/vscode": "^1.61.0",
+    "ts-loader": "^6.2.1",
+    "tslint": "^5.12.1",
+    "typescript": "^3.9.10",
+    "webpack": "^5.61.0",
+    "webpack-cli": "^4.9.1"
+  },
+  "dependencies": {
+    "change-case": "^3.1.0",
+    "js-yaml": "^4.1.0",
+    "mkdirp": "^0.5.1"
+  }
+}
